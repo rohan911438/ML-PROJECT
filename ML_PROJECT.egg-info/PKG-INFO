@@ -1,0 +1,13 @@
+Metadata-Version: 2.4
+Name: ML_PROJECT
+Version: 0.0.1
+Author: Rohan_kumar
+Author-email: 123131rkorohan@gmail.com
+Requires-Dist: pandas
+Requires-Dist: numpy
+Requires-Dist: scikit-learn
+Requires-Dist: matplotlib
+Requires-Dist: seaborn
+Dynamic: author
+Dynamic: author-email
+Dynamic: requires-dist
