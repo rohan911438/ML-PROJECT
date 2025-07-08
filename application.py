@@ -44,7 +44,7 @@ def predict_datapoint():
             return render_template('home.html', results=results[0])
     except Exception as e:
         logging.error(f"Error during prediction: {e}")
-        return "Internal Server Error", 500
+        return render_template('home.html', results="Error: Unable to generate prediction")
     
 if __name__=="__main__":      
     app.run(host="0.0.0.0",port=80)

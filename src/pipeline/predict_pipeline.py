@@ -3,6 +3,10 @@ import pandas as pd
 from src.exception import CustomException
 from src.utils import load_object
 import os
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 
 class PredictPipeline:
@@ -14,6 +18,9 @@ class PredictPipeline:
             model_path = os.path.join("artifacts", "model.pkl")
             preprocessor_path = os.path.join("artifacts", "preprocessor.pkl")
 
+            logging.debug(f"Model path: {model_path}")
+            logging.debug(f"Preprocessor path: {preprocessor_path}")
+
             # Ensure correct file paths are used
             if not os.path.exists(model_path):
                 raise FileNotFoundError(f"Model file not found at {model_path}")
@@ -23,11 +30,18 @@ class PredictPipeline:
             model = load_object(file_path=model_path)
             preprocessor = load_object(file_path=preprocessor_path)
 
+            logging.debug("Artifacts loaded successfully.")
+
             data_scaled = preprocessor.transform(features)
+            logging.debug(f"Scaled data: {data_scaled}")
+
             preds = model.predict(data_scaled)
+            logging.debug(f"Predictions: {preds}")
+
             return preds
 
         except Exception as e:
+            logging.error(f"Error during prediction: {e}")
             raise CustomException(e, sys)
 
 
